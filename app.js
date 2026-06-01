@@ -137,8 +137,6 @@ function setupCustomizer() {
             
             btn.classList.add('active');
             document.getElementById(`tab-${targetTab}`).classList.add('active');
-            
-            playClickSound();
         });
     });
 
@@ -156,7 +154,6 @@ function setupCustomizer() {
             changeCrust3D(crustType);
             
             calculateCustomPizzaPrice();
-            playClickSound();
         });
     });
 
@@ -182,8 +179,10 @@ function setupCustomizer() {
             
             if (isChecked) {
                 item.classList.add('selected');
+                playSizzleSound();
             } else {
                 item.classList.remove('selected');
+                playClickSound();
             }
 
             // Sync with Three.js scene
@@ -219,13 +218,11 @@ function setupShoppingCart() {
     toggleBtn.addEventListener('click', () => {
         drawer.classList.add('active');
         shadow.classList.add('active');
-        playClickSound();
     });
 
     closeBtn.addEventListener('click', () => {
         drawer.classList.remove('active');
         shadow.classList.remove('active');
-        playClickSound();
     });
 
     shadow.addEventListener('click', () => {
@@ -266,8 +263,6 @@ function setupShoppingCart() {
         showNotificationToast(`Customized ${pizzaOrder.name} added to cart!`);
         updateCartDisplay();
         
-        // Synthesize nice celebratory chime
-        playChimeSound();
 
         // Slide open the cart drawer so user sees it instantly
         setTimeout(() => {
@@ -315,7 +310,6 @@ function setupShoppingCart() {
             shoppingCart.push(dealItem);
             showNotificationToast(`${dealItem.name} added to cart!`);
             updateCartDisplay();
-            playChimeSound();
 
             setTimeout(() => {
                 drawer.classList.add('active');
@@ -331,7 +325,7 @@ function setupShoppingCart() {
             return;
         }
 
-        playChimeSound();
+
         
         // Show checkout animation popup
         const checkoutBtn = document.getElementById('btn-checkout');
@@ -466,7 +460,6 @@ function setupCartControls() {
         btn.addEventListener('click', () => {
             const id = btn.getAttribute('data-id');
             shoppingCart = shoppingCart.filter(item => item.id !== id);
-            playClickSound();
             updateCartDisplay();
         });
     });
@@ -478,7 +471,6 @@ function setupCartControls() {
             const item = shoppingCart.find(i => i.id === id);
             if (item) {
                 item.qty++;
-                playClickSound();
                 updateCartDisplay();
             }
         });
@@ -491,12 +483,10 @@ function setupCartControls() {
             const item = shoppingCart.find(i => i.id === id);
             if (item && item.qty > 1) {
                 item.qty--;
-                playClickSound();
                 updateCartDisplay();
             } else if (item && item.qty === 1) {
                 // Delete
                 shoppingCart = shoppingCart.filter(i => i.id !== id);
-                playClickSound();
                 updateCartDisplay();
             }
         });
@@ -549,7 +539,7 @@ function setupOutletLocator() {
             detailsCard.querySelectorAll('p')[0].innerHTML = `<i class="fa-solid fa-phone"></i> ${phone}`;
             detailsCard.querySelectorAll('p')[1].innerHTML = `<i class="fa-solid fa-clock"></i> ${hours}`;
             
-            playClickSound();
+
         });
     });
 }
@@ -579,7 +569,6 @@ function setupMiscInteractions() {
         opt.addEventListener('click', () => {
             switchOptions.forEach(o => o.classList.remove('active'));
             opt.classList.add('active');
-            playClickSound();
             showNotificationToast(`Ordering mode switched to: ${opt.textContent}`);
         });
     });
@@ -587,15 +576,12 @@ function setupMiscInteractions() {
     // 6C. Viewport 3D Button controls hookups (Top, Angled, Spin)
     document.getElementById('btn-view-top').addEventListener('click', () => {
         setCameraView('top');
-        playClickSound();
     });
     document.getElementById('btn-view-ortho').addEventListener('click', () => {
         setCameraView('ortho');
-        playClickSound();
     });
     document.getElementById('btn-reset-pizza').addEventListener('click', () => {
         triggerFunSpin();
-        playChimeSound();
     });
 
     // 6D. Chittagong Beef Kala Bhuna Promo Story CTA
@@ -644,7 +630,7 @@ function setupMiscInteractions() {
         // Scroll smoothly back to Customizer hero section
         document.getElementById('customizer-section').scrollIntoView({ behavior: 'smooth' });
         
-        // Play hot sizzle chime
+        // Play hot sizzle sound for the preset load
         playSizzleSound();
         showNotificationToast("Chittagong Beef Kala Bhuna Preset Loaded!");
     });
