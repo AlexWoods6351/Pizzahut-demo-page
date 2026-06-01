@@ -517,7 +517,29 @@ footer {
 /* Responsive */
 @media (max-width: 768px) {
     .nav-links {
-        display: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 15px;
+        width: 100%;
+    }
+    .glass-nav {
+        flex-direction: column;
+        padding: 15px 5%;
+        align-items: center;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    .cart {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        box-shadow: 0 6px 20px rgba(217, 18, 36, 0.5);
     }
     .hero {
         margin-top: 90px;
